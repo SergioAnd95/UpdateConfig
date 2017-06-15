@@ -2,6 +2,56 @@ import itertools
 import pytest
 import main
 
+
+def test_update_equal_loaded_services():
+
+    config = {
+        'ginger': {
+            'flask': 3,
+        },
+        'cucumber': {
+            'flask': 3,
+        },
+    }
+
+    config = main.update(config, 'django', 3)
+    assert config == {
+        'ginger': {
+            'flask': 3,
+            'django': 1,
+        },
+        'cucumber': {
+            'flask': 3,
+            'django': 2,
+        },
+    }
+
+
+def test_update_same_service():
+    config = {
+        'ginger': {
+            'django': 2,
+            'flask': 3,
+        },
+        'cucumber': {
+            'flask': 1,
+        },
+    }
+
+    config = main.update(config, 'django', 3)
+    assert config == {
+        'ginger': {
+            'django': 2,
+            'flask': 3,
+        },
+        'cucumber': {
+            'flask': 1,
+            'django': 3,
+        },
+    }
+
+
+
 def test_update():
     config = {
         'ginger': {
