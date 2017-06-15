@@ -13,7 +13,7 @@ def test_update():
         },
     }
 
-    main.update(config, 'pylons', 7)
+    config = main.update(config, 'pylons', 7)
     assert config == {
         'ginger': {
             'django': 2,
@@ -33,8 +33,8 @@ def test_initial():
         'cucumber': {},
     }
 
-    main.update(config, 'flask', 3)
-    main.update(config, 'django', 3)
+    config = main.update(config, 'flask', 3)
+    config = main.update(config, 'django', 3)
 
     assert sum(config['ginger'].values()) == sum(config['cucumber'].values())
     assert sum(sum(x.values()) for x in config.values()) == 3+3
